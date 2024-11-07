@@ -1,16 +1,19 @@
 import './App.css';
-import { Cars } from './Cars';
-
-const topCars = [
-  { manufacturer: 'BMW', model: 'm5cs' },
-  { manufacturer: 'Mercedes', model: 'e63s' },
-  { manufacturer: 'Audi', model: 'rs6' },
-];
 
 function App() {
+  const myFirstSubscriber = (name: string) => {
+    console.log('My name is: ', name);
+  };
+
   return (
     <>
-      <Cars cars={topCars} />
+      <button onClick={() => myFirstSubscriber('Bob')}>
+        MyYouTubeChannel-1
+      </button>
+
+      <button onClick={() => myFirstSubscriber('Dima')}>
+        MyYouTubeChannel-2
+      </button>
     </>
   );
 }
