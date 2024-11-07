@@ -1,19 +1,15 @@
 import './App.css';
 
 function App() {
-  const myFirstSubscriber = (name: string) => {
+  const onClickHandler = (name: string) => {
     console.log('My name is: ', name);
   };
 
   return (
     <>
-      <button onClick={() => myFirstSubscriber('Bob')}>
-        MyYouTubeChannel-1
-      </button>
+      <button onClick={() => onClickHandler('Bob')}>MyYouTubeChannel-1</button>
 
-      <button onClick={() => myFirstSubscriber('Dima')}>
-        MyYouTubeChannel-2
-      </button>
+      <button onClick={() => onClickHandler('Dima')}>MyYouTubeChannel-2</button>
     </>
   );
 }
