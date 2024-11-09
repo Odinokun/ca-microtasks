@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './App.css';
-import { Btn } from './components/Btn';
+import { Money } from './components/Money';
 
-type BanknotesType = 'USD' | 'CAD' | 'All';
+export type BanknotesType = 'USD' | 'CAD' | 'All';
 
-type MoneyType = {
+export type MoneyType = {
   banknotes: BanknotesType;
   value: number;
   number: string;
@@ -21,7 +21,7 @@ function App() {
   //   { banknotes: 'USD', value: 50, number: ' x1234567890' },
   //   { banknotes: 'CAD', value: 50, number: ' v1234567890' },
   // ]);
-  const money = [
+  const money: MoneyType[] = [
     { banknotes: 'USD', value: 100, number: ' a1234567890' },
     { banknotes: 'USD', value: 50, number: ' z1234567890' },
     { banknotes: 'CAD', value: 100, number: ' w1234567890' },
@@ -46,22 +46,10 @@ function App() {
 
   return (
     <div className='App'>
-      <div>
-        <div>
-          <Btn name='All' callback={() => filterMoney('All')} />
-          <Btn name='CAD' callback={() => filterMoney('CAD')} />
-          <Btn name='USD' callback={() => filterMoney('USD')} />
-        </div>
-
-        <ul>
-          {currentMoney.map((item, index) => (
-            <li key={index}>
-              <span>{item.banknotes}</span> -<span>{item.value}</span> -
-              <span>{item.number}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Money
+        currentMoney={currentMoney}
+        filterMoney={(value: BanknotesType) => filterMoney(value)}
+      />
     </div>
   );
 }
