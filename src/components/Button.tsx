@@ -1,11 +1,18 @@
 import { FC } from 'react';
 
-type PropsType = {};
+type PropsType = {
+  name: string;
+  callBack: () => void;
+};
 
-export const Button: FC<PropsType> = () => {
+export const Button: FC<PropsType> = ({ name, callBack }) => {
+  const onClickHandler = () => {
+    callBack();
+  };
+
   return (
     <div>
-      <h1>Button</h1>
+      <button onClick={onClickHandler}>{name}</button>
     </div>
   );
 };
