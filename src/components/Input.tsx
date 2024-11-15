@@ -1,23 +1,23 @@
 import { FC, useState, KeyboardEvent, ChangeEvent } from 'react';
 
 type PropsType = {
-  addTask: (title: string) => void;
+  addMessage: (title: string) => void;
 };
 
-export const Input: FC<PropsType> = ({ addTask, ...restProps }) => {
+export const Input: FC<PropsType> = ({ addMessage, ...restProps }) => {
   const [title, setTitle] = useState<string>('');
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setTitle(e.currentTarget.value);
 
-  const addTaskHandler = () => {
+  const addMessageHandler = () => {
     if (!title) return;
-    addTask(title);
+    addMessage(title);
     setTitle('');
   };
 
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') addTaskHandler();
+    if (e.key === 'Enter') addMessageHandler();
   };
 
   return (
@@ -27,7 +27,7 @@ export const Input: FC<PropsType> = ({ addTask, ...restProps }) => {
         onChange={onChangeHandler}
         onKeyDown={onKeyPressHandler}
       />
-      <button onClick={addTaskHandler}>Click me</button>
+      <button onClick={addMessageHandler}>Click me</button>
     </>
   );
 };
