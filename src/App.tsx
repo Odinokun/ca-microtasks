@@ -26,7 +26,7 @@ function App() {
     <div className='App'>
       <div>
         <div>
-          <Input addTask={addTask} />
+          <Input addMessage={addTask} />
         </div>
         <br />
 
