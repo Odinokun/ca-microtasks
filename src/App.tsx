@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Input } from './components/Input';
 import './App.css';
 
 type MessageType = {
@@ -17,9 +18,9 @@ function App() {
     <div className='App'>
       <div>
         <div>
-          <input type='text' />
-          <button>Click me</button>
+          <Input />
         </div>
+        <br />
 
         {message.map(m => (
           <div key={m.id}>{m.message}</div>
