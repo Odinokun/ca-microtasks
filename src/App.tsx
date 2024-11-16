@@ -1,55 +1,48 @@
 import { useState } from 'react';
+import { SingleBtn } from './components/SingleBtn';
+import { SingleInput } from './components/SingleInput';
 import './App.css';
-import { Money } from './components/Money';
 
-export type BanknotesType = 'USD' | 'CAD' | 'All';
-
-export type MoneyType = {
-  banknotes: BanknotesType;
-  value: number;
-  number: string;
+type MessageType = {
+  id: number;
+  message: string;
 };
 
 function App() {
-  // const [money, setMoney] = useState<MoneyType[]>([
-  //   { banknotes: 'USD', value: 100, number: ' a1234567890' },
-  //   { banknotes: 'USD', value: 50, number: ' z1234567890' },
-  //   { banknotes: 'CAD', value: 100, number: ' w1234567890' },
-  //   { banknotes: 'USD', value: 100, number: ' e1234567890' },
-  //   { banknotes: 'USD', value: 50, number: ' c1234567890' },
-  //   { banknotes: 'CAD', value: 100, number: ' r1234567890' },
-  //   { banknotes: 'USD', value: 50, number: ' x1234567890' },
-  //   { banknotes: 'CAD', value: 50, number: ' v1234567890' },
-  // ]);
-  const money: MoneyType[] = [
-    { banknotes: 'USD', value: 100, number: ' a1234567890' },
-    { banknotes: 'USD', value: 50, number: ' z1234567890' },
-    { banknotes: 'CAD', value: 100, number: ' w1234567890' },
-    { banknotes: 'USD', value: 100, number: ' e1234567890' },
-    { banknotes: 'USD', value: 50, number: ' c1234567890' },
-    { banknotes: 'CAD', value: 100, number: ' r1234567890' },
-    { banknotes: 'USD', value: 50, number: ' x1234567890' },
-    { banknotes: 'CAD', value: 50, number: ' v1234567890' },
-  ];
-  const [filter, setFilter] = useState<BanknotesType>('All');
+  const [messages, setMessages] = useState<MessageType[]>([
+    { id: 1, message: 'My message 1' },
+    { id: 2, message: 'My message 2' },
+    { id: 3, message: 'My message 3' },
+  ]);
+  const [title, setTitle] = useState<string>('');
 
-  const filterMoney = (value: BanknotesType) => {
-    setFilter(value);
+  const addMessage = (title: string) => {
+    const newTask = {
+      id: messages.length + 1,
+      message: title,
+    };
+    setMessages([newTask, ...messages]);
   };
 
-  let currentMoney = money;
-  if (filter === 'USD') {
-    currentMoney = money.filter(item => item.banknotes === 'USD');
-  } else if (filter === 'CAD') {
-    currentMoney = money.filter(item => item.banknotes === 'CAD');
-  }
+  const addMessageHandler = () => {
+    if (!title) return;
+    addMessage(title);
+    setTitle('');
+  };
 
   return (
     <div className='App'>
-      <Money
-        currentMoney={currentMoney}
-        filterMoney={(value: BanknotesType) => filterMoney(value)}
-      />
+      <div>
+        <div>
+          <SingleInput value={title} setTitle={setTitle} />
+          <SingleBtn name='Click me' onClick={addMessageHandler} />
+        </div>
+        <br />
+
+        {messages.map(m => (
+          <div key={m.id}>{m.message}</div>
+        ))}
+      </div>
     </div>
   );
 }
