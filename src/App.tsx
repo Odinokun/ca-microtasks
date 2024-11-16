@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Input } from './components/Input';
+import { SingleBtn } from './components/SingleBtn';
+import { SingleInput } from './components/SingleInput';
 import './App.css';
 
 type MessageType = {
@@ -13,8 +14,9 @@ function App() {
     { id: 2, message: 'My message 2' },
     { id: 3, message: 'My message 3' },
   ]);
+  const [title, setTitle] = useState<string>('');
 
-  const addTask = (title: string) => {
+  const addMessage = (title: string) => {
     const newTask = {
       id: messages.length + 1,
       message: title,
@@ -22,11 +24,18 @@ function App() {
     setMessages([newTask, ...messages]);
   };
 
+  const addMessageHandler = () => {
+    if (!title) return;
+    addMessage(title);
+    setTitle('');
+  };
+
   return (
     <div className='App'>
       <div>
         <div>
-          <Input addMessage={addTask} />
+          <SingleInput value={title} setTitle={setTitle} />
+          <SingleBtn name='Click me' onClick={addMessageHandler} />
         </div>
         <br />
 
